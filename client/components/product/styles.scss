@@ -1,0 +1,23 @@
+.product {
+  min-width: 50%!important;
+
+   
+  ::v-deep .v-btn__content {
+    display: flex;
+    height: 100%;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  &__name,
+  &__coast {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+  
+  &__coast {
+    width: 80px;
+    justify-content: flex-end;
+  }
+}

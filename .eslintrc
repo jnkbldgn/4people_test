@@ -1,0 +1,26 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./client/config/webpack.config.js"
+      }
+    }
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:vue/base"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "plugins": [
+    "vue"
+  ],
+  "rules": {
+    "no-console": ["error", { "allow": ["warn", "error", "info"]}]
+  }
+}

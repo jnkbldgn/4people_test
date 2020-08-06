@@ -1,0 +1,10 @@
+.home {
+
+  &__categories {
+
+    .category {
+      width: calc(50% - 5px);
+      margin-top: 10px;
+    }
+  }
+}
