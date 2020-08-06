@@ -1,4 +1,4 @@
-const MAX = 81;
+const MAX = 80;
 const MIN = 20;
 
 function getUSD() {
