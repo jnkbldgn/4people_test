@@ -2,6 +2,12 @@
 
   &__categories {
 
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
     .category {
       width: calc(50% - 5px);
       margin-top: 10px;

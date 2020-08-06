@@ -2,6 +2,7 @@
 /* eslint-disable global-require */
 const express = require('express');
 const routes = require('./routes');
+const api = require('./api');
 const pathUtils = require('./utils/path');
 const devServerInit = require('./devServer');
 
@@ -16,7 +17,8 @@ if (isProd) {
   devServerInit(app);
 }
 
-app.use('/static/', express.static(pathUtils.rootResolve('./dist/static')));
+app.use('/static', express.static(pathUtils.rootResolve('./dist/static')));
+app.use('/api/v1', api);
 app.use(routes);
 
 app.listen(PORT, () => console.info(`app listening at http://localhost:${PORT}`));

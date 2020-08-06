@@ -5,8 +5,7 @@ const WebpackHotMiddleware = require('webpack-hot-middleware');
 const WebpackDevMiddleware = require('webpack-dev-middleware');
 const pathUtils = require('./utils/path');
 
-const initConfig = require(pathUtils.rootResolve('./client/config/webpack.config.js'));
-const webpackConfig = initConfig(process.env, process.argv);
+const webpackConfig = require(pathUtils.rootResolve('./client/config/webpack.config.js'));
 
 module.exports = (app) => {
   webpackConfig.entry.app = [
@@ -14,9 +13,7 @@ module.exports = (app) => {
     webpackConfig.entry.app,
   ];
   webpackConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin({
-      multiStep: true,
-    }),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
   );
 

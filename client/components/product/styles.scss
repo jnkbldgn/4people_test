@@ -5,6 +5,7 @@
   ::v-deep .v-btn__content {
     display: flex;
     height: 100%;
+    max-width: 100%;
     flex-grow: 1;
     justify-content: space-between;
   }
@@ -15,9 +16,15 @@
     height: 100%;
     align-items: center;
   }
+
+  &__name {
+    white-space: break-spaces;
+    text-align: left;
+  }
   
   &__coast {
     width: 80px;
     justify-content: flex-end;
+    flex-shrink: 0;
   }
 }

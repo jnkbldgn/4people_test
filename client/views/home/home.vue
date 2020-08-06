@@ -7,17 +7,17 @@
     <v-row class="home__categories d-block">
       <category
         class="category align-self-start"
-        v-for="(category, index) in categories"
+        v-for="(group, id, index) in GROUPS"
         :class="getClassesCategory(index)"
-        :key="category.id"
-        :title="category.title"
+        :key="id"
+        :id="id"
       >
-        <div :class="getClassesProducts(category.products.length)" class="d-flex">
+        <div :class="getClassesProducts(group.products.length)" class="d-flex">
           <product
             class=""
-            v-for="(product) in category.products"
-            :key="`${category.id}-${product.id}`"
-            :name="product.name"
+            v-for="(product) in group.products"
+            :key="`${group.id}-${product.id}`"
+            :id="product.id"
             :coast="product.coast"
           />
         </div>
@@ -27,14 +27,25 @@
 </template>
 
 <script>
+// Components
 import category from 'Components/category';
 import product from 'Components/product';
+
+// Modules
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'home',
   components: {
     category,
     product,
+  },
+  async mounted() {
+    await this.FETCH_PRODUCTS();
+    this.interval = setInterval(this.FETCH_PRODUCTS, 15000);
+  },
+  destroyed() {
+    clearInterval(this.interval);
   },
   data() {
     return {
@@ -77,7 +88,7 @@ export default {
           ],
         },
         {
-          id: 0,
+          id: 2,
           title: 'Мороженное',
           products: [
             {
@@ -105,7 +116,11 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters(['GROUPS']),
+  },
   methods: {
+    ...mapActions(['FETCH_PRODUCTS']),
     getClassesProducts(length) {
       const oddClasses = ['flex-column'];
       const evenClasses = ['flex-row', 'flex-wrap'];
