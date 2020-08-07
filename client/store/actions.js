@@ -6,15 +6,16 @@ export default {
   FETCH_PRODUCTS: async ({ commit }) => {
     const { Value: data = {} } = await fetchProducts();
     const { Goods: products = [] } = data;
-    const groups = {};
+    const groupsMap = {};
 
     for (let i = 0; i < products.length; i++) {
       const groupId = products[i].G;
-      if (groups[groupId] === undefined) {
-        groups[groupId] = new Group(groupId);
+      if (groupsMap[groupId] === undefined) {
+        groupsMap[groupId] = new Group(groupId);
       }
-      groups[groupId].products.push(new Product(products[i]));
+      groupsMap[groupId].products.push(new Product(products[i]));
     }
+    const groups = Object.values(groupsMap);
     commit('SET_CATEGORIES', groups);
   },
 };

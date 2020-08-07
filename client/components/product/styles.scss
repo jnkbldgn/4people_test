@@ -20,11 +20,13 @@
   &__name {
     white-space: break-spaces;
     text-align: left;
+    text-transform: none;
   }
   
   &__coast {
     width: 80px;
     justify-content: flex-end;
     flex-shrink: 0;
+    transition: background-color ease 0.5s;
   }
 }
