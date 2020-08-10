@@ -18,7 +18,11 @@
         </v-row>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
-        <v-simple-table v-if="!isEmptyCart">
+        <v-simple-table
+          v-if="!isEmptyCart"
+          fixed-header
+          :height="350"
+        >
           <template v-slot:default>
             <thead>
               <tr>
