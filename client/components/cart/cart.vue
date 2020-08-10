@@ -1,7 +1,3 @@
-<style lang="scss" scoped>
-@import './styles.scss';
-</style>
-
 <i18n src="./i18n.json"></i18n>
 
 <template>
@@ -80,13 +76,6 @@ export default {
     products: Array,
     totalQuantity: Number,
     totalCoast: Number,
-  },
-  data() {
-    return {
-      validateQuantity: [
-        (...rest) => console.info(rest) || 'Error',
-      ],
-    };
   },
   computed: {
     isEmptyCart() {

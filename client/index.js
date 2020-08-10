@@ -3,6 +3,9 @@ import vuetify from 'Plugins/vuetify';
 import store from 'Store';
 import i18n from 'I18n';
 import App from '@/App.vue';
+import configureEventSources from 'Api/eventsource';
+
+configureEventSources();
 
 Vue.config.devtools = process.argv.mode === 'development';
 

@@ -1,12 +1,11 @@
-import { fetchProducts } from 'Api';
 import Product from 'Models/product';
 import CartProduct from 'Models/cartProduct';
 import Group from 'Models/group';
 import Cart from 'Models/cart';
 
 export default {
-  FETCH_PRODUCTS: async ({ commit, getters, dispatch }) => {
-    const { Value: data = {} } = await fetchProducts();
+  SET_PRODUCTS: async ({ commit, getters, dispatch }, payload) => {
+    const { Value: data = {} } = payload;
     const { Goods: products = [] } = data;
     const cartProducts = [...getters.CART_PRODUCTS];
     const groupsMap = {};

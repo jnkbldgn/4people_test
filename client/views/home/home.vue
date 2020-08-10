@@ -83,13 +83,6 @@ export default {
     cart,
     product,
   },
-  async mounted() {
-    await this.FETCH_PRODUCTS();
-    this.interval = setInterval(this.FETCH_PRODUCTS, 15000);
-  },
-  destroyed() {
-    clearInterval(this.interval);
-  },
   computed: {
     ...mapGetters(['GROUPS', 'CART_TOTAL_QUANTITY', 'CART_TOTAL_COAST', 'CART_PRODUCTS']),
     middle() {
