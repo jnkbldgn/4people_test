@@ -29,7 +29,7 @@ https://test4people.herokuapp.com/
 ```bash
 npm install
 ```
-- Запустить приожение
+- Запустить приложение
 ```bash
 npm run local
 ```
