@@ -2,51 +2,45 @@
 @import './styles.scss';
 </style>
 
-<i18n src="./i18n.json"></i18n>
-
 <template>
-  <v-btn text class="product text-body-2 pa-0">
-      <div class="product__name flex-grow-1 pl-2">{{$t(id, { quantity })}}</div>
-      <div :class="coastClasses" class="product__coast lighten-5 pr-2">{{coast}}</div>
+  <v-btn
+    text
+    class="product flex-grow-1 text-body-2 pa-0"
+    :class="classes"
+    :disabled="disabled"
+    @click="$emit('click')"
+  >
+      <div
+        class="product__name flex-grow-1 pl-2"
+      >
+        {{$t(`products.${id}`)}}&nbsp;({{quantity}})
+      </div>
+      <productCoast class="product__coast" :value="coast" />
   </v-btn>
 </template>
 
 <script>
+import productCoast from 'Components/productCoast';
+
 export default {
   name: 'product',
+  components: {
+    productCoast,
+  },
   props: {
     id: Number,
     quantity: Number,
     coast: Number,
+    hasCart: Boolean,
+    disabled: Boolean,
   },
-  destroyed() {
-    clearTimeout(this.timeout);
-  },
-  data() {
-    return {
-      coastClasses: {
-        'blue-grey': true,
-        red: false,
-        green: false,
-      },
-    };
-  },
-  watch: {
-    coast: {
-      handler: 'changeCoast',
-    },
-  },
-  methods: {
-    changeCoast(newValue, oldValue) {
-      this.coastClasses['blue-grey'] = newValue === oldValue;
-      this.coastClasses.red = newValue < oldValue;
-      this.coastClasses.green = newValue > oldValue;
-      this.timeout = setTimeout(this.resetCoastClasses, 5000);
-    },
-    resetCoastClasses() {
-      this.coastClasses['blue-grey'] = true;
-      this.coastClasses.red = false;
-      this.coastClasses.green = false;
+  computed: {
+    classes() {
+      const { hasCart } = this;
+      return {
+        indigo: hasCart,
+        'lighten-4': hasCart,
+      };
     },
   },
 };

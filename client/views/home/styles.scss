@@ -1,9 +1,18 @@
 .home {
 
-  &__categories {
+  &__cart {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+  }
 
+  &__categories {
+    padding-bottom: 95px;
     .category {
       margin-bottom: 20px;
     }
   }
+
 }
