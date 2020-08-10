@@ -5,7 +5,6 @@ const compression = require('compression');
 const routes = require('./routes');
 const eventSources = require('./eventSources');
 const pathUtils = require('./utils/path');
-const devServerInit = require('./devServer');
 
 const { PORT = 8080, NODE_ENV = 'production' } = process.env;
 const isProd = NODE_ENV === 'production';
@@ -15,6 +14,7 @@ const app = express();
 if (isProd) {
   app.use(compression());
 } else {
+  const devServerInit = require('./devServer');
   devServerInit(app);
 }
 
