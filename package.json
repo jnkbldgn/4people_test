@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "local": "cross-env NODE_ENV=development nodemon --inspect ./server/server.js --watch ./server",
+    "start": "npm run build && node ./server/server.js",
     "build": "cross-env NODE_ENV=production webpack --config ./client/config/webpack.config.js"
   },
   "repository": {
@@ -27,7 +28,7 @@
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
     "@intlify/vue-i18n-loader": "^1.0.0",
-    "compression-webpack-plugin": "^4.0.0",
+    "compression": "^1.7.4",
     "cross-env": "^7.0.2",
     "css-loader": "^4.2.0",
     "deepmerge": "^4.2.2",
@@ -50,8 +51,8 @@
     "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
-    "babel-loader": "^8.1.0",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
     "eslint": "^7.6.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-webpack": "^0.12.2",

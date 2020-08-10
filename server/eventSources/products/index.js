@@ -24,13 +24,19 @@ function getProducts(req, res) {
   function send() {
     const data = readData();
     res.write(`event: ${eventType}\ndata: ${JSON.stringify(data)}\n\n`);
+    res.flush();
   }
-  res.writeHead(200, {
-    'Content-Type': 'text/event-stream; charset=utf-8',
-    'Cache-Control': 'no-cache',
-  });
-  interval = setInterval(send, 15000);
-  req.on('close', close);
+  try {
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-cache',
+    });
+    interval = setInterval(send, 15000);
+    send();
+    req.on('close', close);
+  } catch (e) {
+    throw new Error(e);
+  }
 }
 
 module.exports = {

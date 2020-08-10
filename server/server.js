@@ -1,6 +1,7 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 const express = require('express');
+const compression = require('compression');
 const routes = require('./routes');
 const eventSources = require('./eventSources');
 const pathUtils = require('./utils/path');
@@ -12,7 +13,7 @@ const isProd = NODE_ENV === 'production';
 const app = express();
 
 if (isProd) {
-  app.use(express.compress());
+  app.use(compression());
 } else {
   devServerInit(app);
 }
@@ -20,5 +21,10 @@ if (isProd) {
 app.use('/static', express.static(pathUtils.rootResolve('./dist/static')));
 app.use('/event', eventSources);
 app.use(routes);
+
+app.use((err, req, res) => {
+  console.error(err);
+  res.status(err.status || 500).send('Error');
+});
 
 app.listen(PORT, () => console.info(`app listening at http://localhost:${PORT}`));

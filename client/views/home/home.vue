@@ -12,7 +12,7 @@
       @deleteProduct="deleteProduct"
       @changeQuantity="setQuantityProduct"
     />
-    <v-row v-if="GROUPS && GROUPS.length" class="home__categories">
+    <v-row v-if="GROUPS && GROUPS.length" class="home__categories flex-column flex-md-row">
       <v-col>
         <category
           class="category"

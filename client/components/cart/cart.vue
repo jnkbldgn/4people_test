@@ -1,13 +1,18 @@
+<style lang="scss" scoped>
+@import './styles.scss';
+</style>
+
 <i18n src="./i18n.json"></i18n>
 
 <template>
   <v-expansion-panels
     accordion
     multiple
+    class="cart"
   >
-    <v-expansion-panel>
+    <v-expansion-panel :disabled="isEmptyCart">
       <v-expansion-panel-header class="indigo lighten-4">
-        <v-row>
+        <v-row class=" flex-column flex-md-row">
           <v-col>{{ $t('header.title') }}</v-col>
           <v-col>{{ $t('header.quantity') }}&nbsp;{{ totalQuantity }}&nbsp;{{ $t('unit') }}</v-col>
           <v-col>{{ $t('header.summary') }}&nbsp;{{ totalCoast }}&nbsp;{{ $t('currency') }}</v-col>
@@ -18,20 +23,21 @@
           v-if="!isEmptyCart"
           fixed-header
           :height="350"
+          class="cart__table"
         >
           <template v-slot:default>
             <thead>
               <tr>
                 <th class="text-left">Наменование</th>
-                <th width="300px" class="text-center">Кол-во</th>
-                <th width="400px" class="text-center">Цена</th>
-                <th width="70px" class="text-center"></th>
+                <th class="text-center">Кол-во</th>
+                <th class="text-center">Цена</th>
+                <th class="text-center"></th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="item in products" :key="item.id">
-                <td>{{ $t(`products.${item.id}`) }}</td>
-                <td class="text-center">
+                <td class="cart__table__name">{{ $t(`products.${item.id}`) }}</td>
+                <td class="text-center cart__table__quantity">
                   <product-quantity
                     :min="1"
                     :max="item.maxQuantity"
@@ -40,14 +46,14 @@
                     @changeQuantity="onChangeQuantity(item, $event)"
                   />
                 </td>
-                <td class="text-center">
+                <td class="text-center cart__table__coast">
                   <product-coast
                     unit
                     :value="item.coast"
                     class="justify-center"
                   />
                 </td>
-                <td class="text-center">
+                <td class="text-center cart__table__delete">
                   <v-btn icon @click="onDelete(item.id)">
                     <v-icon medium>mdi-delete</v-icon>
                   </v-btn>

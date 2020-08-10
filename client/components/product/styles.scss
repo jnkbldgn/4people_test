@@ -19,8 +19,12 @@
   }
 
   &__name {
-    white-space: break-spaces;
     text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+    line-height: 2rem;
   }
   
   &__coast {
