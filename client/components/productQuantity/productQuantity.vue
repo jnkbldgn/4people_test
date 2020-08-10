@@ -1,6 +1,5 @@
 <template>
   <v-text-field
-    class="mx-4"
     step="1"
     type="number"
     v-model="quantity"
