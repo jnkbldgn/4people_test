@@ -18,6 +18,8 @@ if (isProd) {
   devServerInit(app);
 }
 
+app.get('/favicon.ico', (req, res) => res.status(200));
+
 app.use('/static', express.static(pathUtils.rootResolve('./dist/static')));
 app.use('/event', eventSources);
 app.use(routes);
