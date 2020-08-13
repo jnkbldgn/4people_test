@@ -7,7 +7,7 @@ const pathUtils = require('./utils/path');
 
 const webpackConfig = require(pathUtils.rootResolve('./client/config/webpack.config.js'));
 
-module.exports = (app) => {
+module.exports = () => {
   webpackConfig.entry.app = [
     'webpack-hot-middleware/client',
     webpackConfig.entry.app,
@@ -24,8 +24,8 @@ module.exports = (app) => {
   });
   const hotMiddleware = WebpackHotMiddleware(compiler);
 
-  app.use(devMiddleware);
-  app.use(hotMiddleware);
-
-  return app;
+  return {
+    devMiddleware,
+    hotMiddleware,
+  };
 };

@@ -14,8 +14,11 @@ const app = express();
 if (isProd) {
   app.use(compression());
 } else {
-  const devServerInit = require('./devServer');
-  devServerInit(app);
+  const buildDevMiddleware = require('./buildDevMiddleware');
+  const { devMiddleware, hotMiddleware } = buildDevMiddleware();
+
+  app.use(devMiddleware);
+  app.use(hotMiddleware);
 }
 
 app.get('/favicon.ico', (req, res) => res.status(200));
